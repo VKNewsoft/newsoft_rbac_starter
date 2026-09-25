@@ -1,283 +1,287 @@
 # Newsoft RBAC Starter
 
-A reusable **Role-Based Access Control (RBAC) starter project** that provides comprehensive and dynamically configurable access management, including dynamic menu management, role and permission management, and module-level access control.
+**Bahasa / Language:** **Indonesia** | [English](README_EN.md)
 
-The project is built as a **starter kit / foundation** for new applications: it ships with a working admin panel whose users, roles, permissions, menus, and modules are all managed from the database, so access control can be reconfigured at runtime without touching code. It can be used as the base of a larger application, or as a standalone administration and access-control system.
+---
+
+Proyek starter **Role-Based Access Control (RBAC)** yang dapat digunakan ulang, menyediakan manajemen akses yang lengkap dan dapat dikonfigurasi secara dinamis — meliputi manajemen menu dinamis, manajemen role dan permission, serta kontrol akses tingkat modul.
+
+Proyek ini dibangun sebagai **starter kit / fondasi** untuk aplikasi baru: sudah dilengkapi admin panel yang berfungsi penuh, di mana user, role, permission, menu, dan modul semuanya dikelola dari database, sehingga kontrol akses dapat diubah saat aplikasi berjalan tanpa menyentuh kode. Dapat dijadikan basis aplikasi yang lebih besar, atau sebagai sistem administrasi dan kontrol akses mandiri.
 
 > **Stack**
-> - **Framework:** CodeIgniter 4.x (full HMVC architecture)
-> - **Language:** PHP 8.2+
-> - **Database:** MySQL 8.x (MariaDB compatible)
-> - **Platform:** developed and tested on XAMPP (Windows), works on any standard AMP stack
+> - **Framework:** CodeIgniter 4.x (arsitektur HMVC penuh)
+> - **Bahasa:** PHP 8.2+
+> - **Database:** MySQL 8.x (kompatibel MariaDB)
+> - **Platform:** dikembangkan dan diuji di XAMPP (Windows), berjalan di stack AMP standar mana pun
 
 ---
 
-## Project Overview
+## Gambaran Proyek
 
-The application is an Admin Panel starter designed as a *Web Security* foundation: it centrally controls users, roles, permissions, menus, and modules for every application built on top of it.
+Aplikasi ini adalah starter Admin Panel yang dirancang sebagai fondasi *Web Security*: mengontrol secara terpusat user, role, permission, menu, dan modul untuk setiap aplikasi yang dibangun di atasnya.
 
-- **Everything is dynamic.** Menus, roles, permissions, and module registration are stored in the `core_*` database tables and rendered by the application at runtime.
-- **Full HMVC.** Every feature lives in its own module (`app/Modules/<Name>`), each containing its own controllers, models, views, assets, and routes. Shared code lives in the `Common` module.
-- **Multi level roles and multi company.** Roles and users can be organized by hierarchy level and by company, enabling flexible access management for complex organizations.
-- **Ready for extension.** New features are added as modules and integrate with the RBAC system automatically.
-
----
-
-## Core Features
-
-The following features are implemented and verified in the codebase:
-
-- **User management** — create, update, deactivate, and delete user accounts (`builtin/user`), with user-role assignment (`builtin/user-role`).
-- **Role management** — define and manage multi level roles (`builtin/role`), assign roles to users, and control which roles can see which menus (`builtin/menu-role`).
-- **Permission management** — define permissions per module (`builtin/permission`) and bind permissions to roles (`builtin/role-permission`). Permissions are enforced in controllers via `hasPermission()` checks.
-- **Dynamic menu management** — build and reorder the application menu from the admin panel (`builtin/menu`); menus support categories, parents, icons, ordering, and role visibility.
-- **Module management** — register modules in the database (`builtin/module`), activate/deactivate them, and control whether they appear at login.
-- **Module-level access control** — menu entries are bound to modules, and module access is granted per role; navigation and routes are filtered by the user's permissions.
-- **Authentication and authorization** — login, registration, and password recovery modules, session-based auth, CSRF token handling on forms, and route protection filters.
-- **Security Monitor** — attack-type logging (SQL injection / XSS / brute force), rate limiting, and IP block management (`securitymonitor`).
-- **Module asset loader** — module CSS/JS served through a `module-assets` route with correct MIME types, caching, and nested path support.
-- **Multi company support** — companies and identity data (`company`, `identitas`) can be managed and linked to users.
-- **Reusable architecture** — a shared `Common` module (base controller, base model, design system, shared JS/CSS) that every module builds on.
-
-> The default dashboard, DB schema synchronization tool, regional data, and other supporting modules are examples of this architecture and can be kept, adapted, or removed per project.
+- **Semuanya dinamis.** Menu, role, permission, dan registrasi modul disimpan di tabel database `core_*` dan dirender oleh aplikasi saat runtime.
+- **HMVC penuh.** Setiap fitur berada di modulnya sendiri (`app/Modules/<Nama>`), masing-masing berisi controller, model, view, assets, dan routes sendiri. Kode bersama berada di modul `Common`.
+- **Role multi level dan multi perusahaan.** Role dan user dapat diorganisasikan berdasarkan level hierarki dan perusahaan, memungkinkan manajemen akses yang fleksibel untuk organisasi kompleks.
+- **Siap dikembangkan.** Fitur baru ditambahkan sebagai modul dan otomatis terintegrasi dengan sistem RBAC.
 
 ---
 
-## RBAC Architecture
+## Fitur Utama
 
-### How the pieces fit together
+Fitur-fitur berikut sudah diimplementasikan dan terverifikasi di codebase:
 
-| Concept | Table(s) | Managed by |
+- **Manajemen user** — membuat, mengubah, menonaktifkan, dan menghapus akun user (`builtin/user`), dengan penugasan role ke user (`builtin/user-role`).
+- **Manajemen role** — mendefinisikan dan mengelola role multi level (`builtin/role`), menugaskan role ke user, dan mengatur role mana yang dapat melihat menu tertentu (`builtin/menu-role`).
+- **Manajemen permission** — mendefinisikan permission per modul (`builtin/permission`) dan mengaitkan permission ke role (`builtin/role-permission`). Permission ditegakkan di controller melalui pengecekan `hasPermission()`.
+- **Manajemen menu dinamis** — membangun dan mengurutkan menu aplikasi dari admin panel (`builtin/menu`); menu mendukung kategori, induk (parent), ikon, urutan, dan visibilitas per role.
+- **Manajemen modul** — mendaftarkan modul ke database (`builtin/module`), mengaktifkan/menonaktifkan, dan mengatur apakah modul muncul saat login.
+- **Kontrol akses tingkat modul** — entri menu terikat pada modul, dan akses modul diberikan per role; navigasi dan route difilter berdasarkan permission user.
+- **Autentikasi dan otorisasi** — modul login, registrasi, dan pemulihan password, auth berbasis session, penanganan token CSRF pada form, serta filter proteksi route.
+- **Security Monitor** — pencatatan jenis serangan (SQL injection / XSS / brute force), rate limiting, dan manajemen blokir IP (`securitymonitor`).
+- **Pemuat asset modul** — CSS/JS modul disajikan melalui route `module-assets` dengan MIME type yang benar, caching, dan dukungan path bersarang.
+- **Dukungan multi perusahaan** — data perusahaan dan identitas (`company`, `identitas`) dapat dikelola dan dikaitkan dengan user.
+- **Arsitektur yang dapat digunakan ulang** — modul `Common` bersama (base controller, base model, design system, JS/CSS bersama) yang menjadi fondasi semua modul.
+
+> Dashboard bawaan, tool sinkronisasi skema DB, data wilayah, dan modul pendukung lainnya adalah contoh dari arsitektur ini dan dapat dipertahankan, disesuaikan, atau dihapus sesuai kebutuhan proyek.
+
+---
+
+## Arsitektur RBAC
+
+### Bagaimana semuanya terhubung
+
+| Konsep | Tabel | Dikelola oleh |
 |---|---|---|
-| Users | `core_user`, `core_user_role` | `builtin/user`, `builtin/user-role` |
-| Roles | `core_role` | `builtin/role` |
-| Modules | `core_module` (+ `core_module_status`) | `builtin/module` |
-| Module permissions | `core_module_permission` | `builtin/permission` |
-| Role ↔ permission grants | `core_role_module_permission` | `builtin/role-permission` |
-| Menus | `core_menu`, `core_menu_kategori` | `builtin/menu` |
-| Menu ↔ role visibility | `core_menu_role` | `builtin/menu-role` |
-| Companies | `core_company` | `company` |
+| User | `core_user`, `core_user_role` | `builtin/user`, `builtin/user-role` |
+| Role | `core_role` | `builtin/role` |
+| Modul | `core_module` (+ `core_module_status`) | `builtin/module` |
+| Permission modul | `core_module_permission` | `builtin/permission` |
+| Pemberian role ↔ permission | `core_role_module_permission` | `builtin/role-permission` |
+| Menu | `core_menu`, `core_menu_kategori` | `builtin/menu` |
+| Visibilitas menu ↔ role | `core_menu_role` | `builtin/menu-role` |
+| Perusahaan | `core_company` | `company` |
 
-### How access is resolved
+### Bagaimana akses dihitung
 
-1. **A module is registered** in `core_module` with a unique `nama_module` (e.g. `builtin/role`, `dashboard`).
-2. **Permissions are attached** to the module in `core_module_permission` (e.g. `create`, `read_all`, `update_all`, `delete_all`).
-3. **Roles are granted permissions** through `core_role_module_permission` from the Role Permission screen.
-4. **Menus are bound to modules** in `core_menu` and made visible to specific roles via `core_menu_role`.
-5. **At request time** the `Bootstrap` filter loads the user's session, the menu tree, and the permission map (cached for performance). Controllers call `$this->hasPermission('read_all')` etc. before rendering or writing, and the sidebar renders only the menus the user's roles allow.
+1. **Modul didaftarkan** di `core_module` dengan `nama_module` unik (mis. `builtin/role`, `dashboard`).
+2. **Permission dilekatkan** ke modul di `core_module_permission` (mis. `create`, `read_all`, `update_all`, `delete_all`).
+3. **Role diberi permission** melalui `core_role_module_permission` dari layar Role Permission.
+4. **Menu diikat ke modul** di `core_menu` dan dibuat terlihat untuk role tertentu melalui `core_menu_role`.
+5. **Saat request masuk**, filter `Bootstrap` memuat session user, pohon menu, dan peta permission (di-cache demi performa). Controller memanggil `$this->hasPermission('read_all')` dan seterusnya sebelum merender atau menulis, dan sidebar hanya menampilkan menu yang diizinkan oleh role user.
 
-Because all of these relationships live in the database, access control is **dynamically configurable**: adding a screen to a role, revoking a permission, or hiding a menu is a data change, not a code change.
+Karena semua relasi ini tersimpan di database, kontrol akses **dapat dikonfigurasi secara dinamis**: menambah layar ke suatu role, mencabut permission, atau menyembunyikan menu adalah perubahan data, bukan perubahan kode.
 
 ---
 
-## Project Structure
+## Struktur Proyek
 
 ```text
 app/
-  Config/               CodeIgniter configuration (Routes, Database, Filters, ...)
+  Config/               Konfigurasi CodeIgniter (Routes, Database, Filters, ...)
   Database/
-    newsoft_base.sql    Complete initial schema + seed data (34 tables)
-  Filters/              Request filters (Bootstrap, security, ...)
-  Helpers/              Global helpers
-  Language/             Language files
-  Libraries/            Shared libraries
-  Models/               Global models
-  Modules/              HMVC modules (see below)
-  Views/                Global/error views
+    newsoft_base.sql    Skema awal lengkap + data seed (34 tabel)
+  Filters/              Filter request (Bootstrap, security, ...)
+  Helpers/              Helper global
+  Language/             File bahasa
+  Libraries/            Library bersama
+  Models/               Model global
+  Modules/              Modul HMVC (lihat di bawah)
+  Views/                View global/error
 public/                 Web root (index.php, assets)
-system/                 CodeIgniter 4 framework
+system/                 Framework CodeIgniter 4
 tools/
-  create_hmvc_module.php  HMVC module generator (scaffold a new module)
-manual_installer/       CLI installer + verification scripts
-writable/               Cache, logs, sessions, uploads (not version-controlled)
+  create_hmvc_module.php  Generator modul HMVC (scaffold modul baru)
+manual_installer/       Installer CLI + skrip verifikasi
+writable/               Cache, log, session, upload (tidak ikut version control)
 ```
 
-### HMVC module layout
+### Struktur modul HMVC
 
-Every module follows the same self-contained structure:
+Setiap modul mengikuti struktur mandiri yang sama:
 
 ```text
-app/Modules/<Name>/
-  Config/Routes.php     Module routes (auto-discovered by app/Config/Routes.php)
-  Controllers/          Module controllers
-  Models/               Module models
-  Views/                Module views (namespaced view resolution)
-  Assets/               Module CSS/JS (served via /module-assets/<module>/...)
+app/Modules/<Nama>/
+  Config/Routes.php     Route modul (otomatis ditemukan oleh app/Config/Routes.php)
+  Controllers/          Controller modul
+  Models/               Model modul
+  Views/                View modul (resolusi view dengan namespace)
+  Assets/               CSS/JS modul (dilayani via /module-assets/<modul>/...)
 ```
 
-The `Common` module contains the shared base controller, base model, global design system, and reusable frontend assets used by all modules.
+Modul `Common` berisi base controller, base model, design system global, dan aset frontend yang dapat digunakan ulang oleh semua modul.
 
 ---
 
-## Installation Guide
+## Panduan Instalasi
 
-### Prerequisites
+### Prasyarat
 
-- PHP **8.2+** with `mysqli`/`pdo_mysql` enabled
-- **MySQL 8.x** (or MariaDB)
-- Apache with `mod_rewrite` (or any web server able to run CodeIgniter 4)
-- [XAMPP](https://www.apachefriends.org/) is the easiest option on Windows — start **Apache** and **MySQL**
+- PHP **8.2+** dengan ekstensi `mysqli`/`pdo_mysql` aktif
+- **MySQL 8.x** (atau MariaDB)
+- Apache dengan `mod_rewrite` (atau web server lain yang mampu menjalankan CodeIgniter 4)
+- [XAMPP](https://www.apachefriends.org/) adalah pilihan termudah di Windows — jalankan **Apache** dan **MySQL**
 
-### Step 1 — Get the project
+### Langkah 1 — Dapatkan proyeknya
 
 ```bash
 git clone https://github.com/VKNewsoft/newsoft_rbac_starter.git
 ```
 
-Or download and extract the ZIP into your web root (e.g. `C:\xampp\htdocs\newsoft_rbac_starter`). Make sure the `writable/` directory is writable by the web server (cache, logs, sessions).
+Atau unduh dan ekstrak ZIP ke web root Anda (mis. `C:\xampp\htdocs\newsoft_rbac_starter`). Pastikan direktori `writable/` dapat ditulis oleh web server (cache, log, session).
 
-### Step 2 — Run the installer
+### Langkah 2 — Jalankan installer
 
-The database is created automatically by the installer — you do not need to create it by hand.
+Database dibuat otomatis oleh installer — Anda tidak perlu membuatnya manual.
 
-#### Option A — Web installer (recommended) ⭐
+#### Opsi A — Installer web (disarankan) ⭐
 
-1. Start **Apache** and **MySQL** (XAMPP Control Panel).
-2. Open the application URL in a browser, e.g. `http://localhost/newsoft_rbac_starter/`.
-3. If the database is not initialized, the `InstallerCheck` filter automatically redirects you to the `/installer` page.
-4. Fill in the database configuration form:
+1. Jalankan **Apache** dan **MySQL** (XAMPP Control Panel).
+2. Buka URL aplikasi di browser, mis. `http://localhost/newsoft_rbac_starter/`.
+3. Jika database belum diinisialisasi, filter `InstallerCheck` otomatis mengalihkan Anda ke halaman `/installer`.
+4. Isi form konfigurasi database:
 
-   | Field | Typical XAMPP value |
+   | Field | Nilai khas XAMPP |
    |---|---|
    | Database Host | `localhost` |
    | Database Port | `3306` |
    | Database Username | `root` |
-   | Database Password | *(leave empty)* |
+   | Database Password | *(biarkan kosong)* |
    | Database Name | `newsoft_app` |
 
-5. Click **Install Database**. The installer imports `app/Database/newsoft_base.sql` — **34 tables**, 82,000+ regional rows, and all seed data — then writes `app/Config/Database.php` automatically.
-6. Wait for the success page. The import takes about 1–2 minutes; do not close the browser tab while it runs.
-7. After success you are redirected to the login page.
+5. Klik **Install Database**. Installer mengimpor `app/Database/newsoft_base.sql` — **34 tabel**, 82.000+ baris data wilayah, dan seluruh data seed — lalu menulis `app/Config/Database.php` secara otomatis.
+6. Tunggu halaman sukses. Proses impor memakan waktu sekitar 1–2 menit; jangan tutup tab browser selama proses berjalan.
+7. Setelah berhasil, Anda diarahkan ke halaman login.
 
-**Advantages:** user-friendly UI, automatic input validation, database config saved automatically, clear error messages, no terminal needed.
+**Keunggulan:** UI ramah pengguna, validasi input otomatis, konfigurasi database tersimpan otomatis, pesan error yang jelas, tanpa perlu terminal.
 
-#### Option B — CLI installer
+#### Opsi B — Installer CLI
 
-From the repository root:
+Dari root repositori:
 
 ```bash
 cd manual_installer
-install.bat            # Windows interactive menu
-# or directly:
+install.bat            # Menu interaktif Windows
+# atau langsung:
 php import_sql.php
 php verify_import.php
 php check_tables.php
 ```
 
-The import shows realtime progress and takes 1–2 minutes because of the large regional dataset. After a manual import, configure `app/Config/Database.php` with your actual server settings.
+Proses impor menampilkan progres realtime dan memakan waktu 1–2 menit karena dataset wilayah yang besar. Setelah impor manual, konfigurasikan `app/Config/Database.php` dengan pengaturan server Anda.
 
-> ⚠️ **Warning:** both installers are fresh-install workflows that can **drop and recreate the target database**. Never run them against a production database or any database containing data that must be preserved. Create a backup first, e.g. `mysqldump -u root newsoft_app > backup.sql`.
+> ⚠️ **Peringatan:** kedua installer adalah alur fresh-install yang dapat **menghapus dan membuat ulang database target**. Jangan pernah menjalankannya pada database produksi atau database apa pun yang datanya harus dipertahankan. Buat backup terlebih dahulu, mis. `mysqldump -u root newsoft_app > backup.sql`.
 
-### Step 3 — Verify the installation
+### Langkah 3 — Verifikasi instalasi
 
 ```bash
 cd manual_installer
 php verify_import.php
 ```
 
-Expected results:
+Hasil yang diharapkan:
 
 - `Expected: 34 tables` / `Found: 34 tables` ✅
-- Row counts shown for the important tables (`core_user`, `core_menu`, `core_role`, `core_wilayah_kelurahan`, `core_bank`, ...)
-- `php check_tables.php` shows the per-table checklist (✅ ada / ❌ hilang)
-- The `core_user` table exists — `InstallerCheck` uses it to detect an initialized application
-- `writable/logs/` contains no new errors
+- Jumlah baris ditampilkan untuk tabel-tabel penting (`core_user`, `core_menu`, `core_role`, `core_wilayah_kelurahan`, `core_bank`, ...)
+- `php check_tables.php` menampilkan checklist per tabel (✅ ada / ❌ hilang)
+- Tabel `core_user` ada — `InstallerCheck` menggunakannya untuk mendeteksi aplikasi yang sudah diinisialisasi
+- `writable/logs/` tidak berisi error baru
 
-### Step 4 — First login
+### Langkah 4 — Login pertama
 
 | Username | Password |
 |---|---|
 | `admin` | `123456` |
 
-The seeded installation includes 1 default company, the Administrator role, default menu/role configuration, 141 Indonesian banks, and 82,503 kelurahan rows (complete Indonesian administrative regions).
+Instalasi bawaan mencakup 1 perusahaan default, role Administrator, konfigurasi menu/role default, 141 bank Indonesia, dan 82.503 baris kelurahan (data wilayah administratif Indonesia lengkap).
 
-> ⚠️ The bootstrap credentials are for initial setup only. **Change the admin password immediately** before exposing the application beyond your local machine.
+> ⚠️ Kredensial bawaan hanya untuk setup awal. **Segera ganti password admin** sebelum aplikasi diakses di luar komputer lokal Anda.
 
-### Troubleshooting (quick)
+### Troubleshooting (ringkas)
 
-| Problem | Solution |
+| Masalah | Solusi |
 |---|---|
-| `Connection refused` / can't connect to MySQL | Start the MySQL service, then verify host and port. |
-| `Access denied for user` | Check username/password; the account must be able to create databases and tables. |
-| `Unknown database` | Normal on first setup — run the web installer or `php manual_installer/import_sql.php`. |
-| `Table 'core_module' doesn't exist` | Import incomplete — rerun the import, then `php check_tables.php`. |
-| Installer page does not appear | Check `app/Config/Database.php`, open `/installer` manually, inspect `writable/logs/`. |
-| Import seems to hang | Normal for 82,000+ rows (1–2 minutes); do not close the browser/terminal. |
+| `Connection refused` / tidak bisa konek MySQL | Jalankan service MySQL, lalu periksa host dan port. |
+| `Access denied for user` | Periksa username/password; akun harus bisa membuat database dan tabel. |
+| `Unknown database` | Normal saat setup pertama — jalankan installer web atau `php manual_installer/import_sql.php`. |
+| `Table 'core_module' doesn't exist` | Impor belum selesai — jalankan ulang impor, lalu `php check_tables.php`. |
+| Halaman installer tidak muncul | Periksa `app/Config/Database.php`, buka `/installer` manual, inspeksi `writable/logs/`. |
+| Impor terasa berhenti | Normal untuk 82.000+ baris (1–2 menit); jangan tutup browser/terminal. |
 
-📖 More detail: [INSTALLATION.md](INSTALLATION.md) (panduan step-by-step) and [DATABASE_INSTALLATION_GUIDE.md](DATABASE_INSTALLATION_GUIDE.md) (technical troubleshooting & FAQ).
-
----
-
-## Configuration
-
-- **Database** — configured in `app/Config/Database.php` (written by the web installer; not version-controlled). Copy `.env.example` / `project.config.example.json` for environment templates.
-- **Base URL** — set in `app/Config/App.php` or left to auto-detection.
-- **Routes** — global routes live in `app/Config/Routes.php`; every module contributes its own `app/Modules/*/Config/Routes.php` which is auto-discovered.
-- **Filters** — request filters (bootstrap, security, rate limiting) are registered in `app/Config/Filters.php`.
-- **Writable directory** — `writable/` must be writable by the web server (cache, logs, sessions). Its contents are not committed.
-
-Never commit real credentials. Keep production secrets out of the repository.
+📖 Detail lebih lanjut: [INSTALLATION.md](INSTALLATION.md) (panduan langkah demi langkah) dan [DATABASE_INSTALLATION_GUIDE.md](DATABASE_INSTALLATION_GUIDE.md) (troubleshooting teknis & FAQ).
 
 ---
 
-## Module Development Guide
+## Konfigurasi
 
-### Create a module
+- **Database** — dikonfigurasi di `app/Config/Database.php` (ditulis oleh installer web; tidak ikut version control). Salin `.env.example` / `project.config.example.json` sebagai template environment.
+- **Base URL** — diatur di `app/Config/App.php` atau biarkan terdeteksi otomatis.
+- **Routes** — route global ada di `app/Config/Routes.php`; setiap modul menyumbang `app/Modules/*/Config/Routes.php` sendiri yang ditemukan secara otomatis.
+- **Filters** — filter request (bootstrap, security, rate limiting) didaftarkan di `app/Config/Filters.php`.
+- **Direktori writable** — `writable/` harus dapat ditulis oleh web server (cache, log, session). Isinya tidak di-commit.
 
-Use the included generator:
+Jangan pernah commit kredensial asli. Jauhkan rahasia produksi dari repositori.
+
+---
+
+## Panduan Pengembangan Modul
+
+### Membuat modul
+
+Gunakan generator yang tersedia:
 
 ```bash
 php tools/create_hmvc_module.php Produk produk
 ```
 
-This scaffolds `app/Modules/Produk/` with `Config/Routes.php`, `Controllers/Produk.php`, `Models/ProdukModel.php`, and views.
+Ini membuat kerangka `app/Modules/Produk/` berisi `Config/Routes.php`, `Controllers/Produk.php`, `Models/ProdukModel.php`, dan views.
 
-### Register it with the RBAC system
+### Mendaftarkannya ke sistem RBAC
 
-1. **Routes** — add routes in `app/Modules/Produk/Config/Routes.php`; they are picked up automatically (no central registration needed).
-2. **Register the module** — in the admin panel open **Module** (`builtin/module`) and add a module with `nama_module` = `produk`. Here you can also activate/deactivate it and control login behavior.
-3. **Define permissions** — open **Module Permission** (`builtin/permission`) and add the permissions the module understands (e.g. `create`, `read_all`, `update_all`, `delete_all`).
-4. **Grant permissions to roles** — open **Role Permission** (`builtin/role-permission`) and tick the new permissions per role.
-5. **Add menus** — open **Menu** (`builtin/menu`) and create a menu entry bound to module `produk`; control which roles see it via **Menu Role** (`builtin/menu-role`).
-6. **Database structures** — create the module's own tables (e.g. `base_produk`) with a migration or SQL, and keep the module's model queries inside the module.
-7. **Guard the controller** — call `$this->hasPermission('read_all')` (etc.) in your controller actions so the framework enforces the same rules the UI shows.
+1. **Routes** — tambahkan route di `app/Modules/Produk/Config/Routes.php`; route otomatis terbaca (tanpa registrasi terpusat).
+2. **Daftarkan modul** — di admin panel buka **Module** (`builtin/module`) dan tambahkan modul dengan `nama_module` = `produk`. Di sini Anda juga dapat mengaktifkan/menonaktifkannya dan mengatur perilaku login.
+3. **Definisikan permission** — buka **Module Permission** (`builtin/permission`) dan tambahkan permission yang dipahami modul (mis. `create`, `read_all`, `update_all`, `delete_all`).
+4. **Beri permission ke role** — buka **Role Permission** (`builtin/role-permission`) dan centang permission baru per role.
+5. **Tambahkan menu** — buka **Menu** (`builtin/menu`) dan buat entri menu yang terikat ke modul `produk`; atur role mana yang melihatnya melalui **Menu Role** (`builtin/menu-role`).
+6. **Struktur database** — buat tabel milik modul (mis. `base_produk`) dengan migration atau SQL, dan simpan query model modul di dalam modul itu sendiri.
+7. **Amankan controller** — panggil `$this->hasPermission('read_all')` (dan seterusnya) di action controller Anda agar framework menegakkan aturan yang sama dengan yang ditampilkan UI.
 
-From this point the module participates in the access-control system like any built-in module: menu visibility, permission checks, and role assignment all work without further code.
-
----
-
-## Usage Guide
-
-Log in and manage everything from the sidebar:
-
-- **Dashboard** (`dashboard`) — landing page after login.
-- **Manajemen Aplikasi / Module** (`builtin/module`) — register modules, toggle active status, see whether each module's controller exists.
-- **Module Permission** (`builtin/permission`) — define the permission verbs available per module.
-- **Role** (`builtin/role`) — create roles (e.g. Administrator, User Biasa) and set their level.
-- **Role Permission** (`builtin/role-permission`) — grant each role its set of module permissions.
-- **User / Semua User** (`builtin/user`) — manage accounts; **User Role** (`builtin/user-role`) assigns roles to users.
-- **Menu** (`builtin/menu`) — build the sidebar: categories, parents, icons, order; **Menu Role** (`builtin/menu-role`) controls role visibility.
-- **Security Monitor** (`securitymonitor`) — review attack logs, rate-limit counters, and blocked IPs.
-- **DB Synchronisation** (`db-synchronisation`) — compare the live schema with the installer dump and generate safe/full sync SQL.
-- **Setting** (`builtin/setting-app`, `builtin/setting-layout`, `builtin/setting-registrasi`) — application name, layout, and registration behavior.
-
-A typical setup flow: create a role → grant it permissions → create users and assign the role → add menus for the new screens and attach the role.
+Sejak titik ini modul berpartisipasi dalam sistem kontrol akses seperti modul bawaan lainnya: visibilitas menu, pengecekan permission, dan penugasan role semuanya bekerja tanpa kode tambahan.
 
 ---
 
-## Development and Contribution
+## Panduan Penggunaan
 
-- Keep module controller/model/view/asset code together under the HMVC module; put reusable frontend code in the shared `Common` module instead of duplicating it.
-- Preserve the shared design-system classes (`page-shell`, `page-hero`, `page-toolbar`, `page-card`, `form-card`, `card-table-wrap`).
-- For list screens, keep server-side pagination, explicit query columns, and page-scoped lookups (avoid N+1 queries).
-- Use CodeIgniter **Migrations** for future schema changes so they remain tracked and reproducible; back up the database before destructive DDL or synchronization.
-- Check `writable/logs/` and the browser console after UI changes; test responsive behavior down to mobile widths.
-- Additional guides in this repository: [`HMVC_MODULE_GUIDE.md`](HMVC_MODULE_GUIDE.md), [`INSTALLATION.md`](INSTALLATION.md), [`DATABASE_INSTALLATION_GUIDE.md`](DATABASE_INSTALLATION_GUIDE.md).
+Login dan kelola semuanya dari sidebar:
 
-Contributions: fork the repository, create a feature branch, keep changes small and verifiable, and open a pull request describing the motivation and testing done.
+- **Dashboard** (`dashboard`) — halaman landing setelah login.
+- **Manajemen Aplikasi / Module** (`builtin/module`) — daftarkan modul, aktif/nonaktifkan, lihat apakah controller tiap modul ada.
+- **Module Permission** (`builtin/permission`) — definisikan verb permission yang tersedia per modul.
+- **Role** (`builtin/role`) — buat role (mis. Administrator, User Biasa) dan atur levelnya.
+- **Role Permission** (`builtin/role-permission`) — berikan set permission modul ke tiap role.
+- **User / Semua User** (`builtin/user`) — kelola akun; **User Role** (`builtin/user-role`) menugaskan role ke user.
+- **Menu** (`builtin/menu`) — bangun sidebar: kategori, induk, ikon, urutan; **Menu Role** (`builtin/menu-role`) mengatur visibilitas per role.
+- **Security Monitor** (`securitymonitor`) — tinjau log serangan, penghitung rate-limit, dan IP yang diblokir.
+- **DB Synchronisation** (`db-synchronisation`) — bandingkan skema live dengan dump installer dan hasilkan SQL sinkronisasi aman/penuh.
+- **Setting** (`builtin/setting-app`, `builtin/setting-layout`, `builtin/setting-registrasi`) — nama aplikasi, layout, dan perilaku registrasi.
+
+Alur setup yang umum: buat role → berikan permission → buat user dan tugaskan role → tambahkan menu untuk layar baru dan kaitkan role-nya.
 
 ---
 
-## License
+## Pengembangan dan Kontribusi
 
-This project is licensed under the terms in [`LICENSE`](LICENSE) (© 2025 Newsoft Developer). See the license file for the full text.
+- Simpan kode controller/model/view/asset modul bersama di dalam modul HMVC; letakkan kode frontend yang dapat digunakan ulang di modul `Common`, jangan diduplikasi.
+- Pertahankan class design system bersama (`page-shell`, `page-hero`, `page-toolbar`, `page-card`, `form-card`, `card-table-wrap`).
+- Untuk layar daftar, pertahankan pagination sisi server, kolom query eksplisit, dan lookup terbatas per halaman (hindari query N+1).
+- Gunakan **Migrations** CodeIgniter untuk perubahan skema di masa depan agar tetap terlacak dan dapat direproduksi; backup database sebelum DDL destruktif atau sinkronisasi.
+- Periksa `writable/logs/` dan console browser setelah mengubah UI; uji perilaku responsif hingga lebar mobile.
+- Panduan tambahan di repositori ini: [`HMVC_MODULE_GUIDE.md`](HMVC_MODULE_GUIDE.md), [`INSTALLATION.md`](INSTALLATION.md), [`DATABASE_INSTALLATION_GUIDE.md`](DATABASE_INSTALLATION_GUIDE.md).
+
+Kontribusi: fork repositori, buat branch fitur, jaga perubahan tetap kecil dan terverifikasi, lalu buka pull request yang menjelaskan motivasi dan pengujian yang dilakukan.
+
+---
+
+## Lisensi
+
+Proyek ini dilisensikan berdasarkan ketentuan di [`LICENSE`](LICENSE) (© 2025 Newsoft Developer). Lihat file lisensi untuk teks lengkap.
