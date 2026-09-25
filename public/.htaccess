@@ -1,0 +1,15 @@
+# Disable directory browsing
+Options All -Indexes
+
+php_flag engine off
+ServerSignature Off
+
+<IfModule mod_headers.c>
+    <FilesMatch "\.(css|js|mjs|woff2?|ttf|eot|svg|png|jpg|jpeg|gif|webp|ico)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+</IfModule>
+
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/css text/javascript application/javascript application/json image/svg+xml
+</IfModule>

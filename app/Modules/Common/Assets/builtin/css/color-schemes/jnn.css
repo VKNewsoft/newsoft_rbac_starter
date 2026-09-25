@@ -1,0 +1,72 @@
+:root {
+	--sidebar-group-color: #8b3035;
+	--sidebar-group-active-bg: #f7ebec;
+	--sidebar-group-active-color: #8b3035;
+	--sidebar-group-active-border: rgba(139, 48, 53, 0.18);
+	--sidebar-group-muted: #936b6d;
+	--sidebar-item-hover-bg: #f3dfe0;
+	--sidebar-item-hover-color: #8b3035;
+	--sidebar-item-active-bg: #a84c51;
+	--sidebar-item-active-color: #ffffff;
+	--sidebar-item-active-hover-bg: #692629;
+	--sidebar-item-active-hover-color: #ffffff;
+	--sidebar-tree-open-bg: #f7ebec;
+	--sidebar-tree-open-color: #8b3035;
+	--btn-primary-bg: #8b3035;
+	--btn-primary-border: #8b3035;
+	--btn-primary-hover-bg: #913e42;
+	--btn-primary-hover-border: #913e42;
+	--btn-primary-active-bg: #692629;
+	--btn-primary-active-border: #692629;
+	--btn-primary-disabled-bg: #c58d90;
+	--btn-primary-disabled-border: #c58d90;
+	--btn-success-bg: #a84c51;
+	--btn-success-border: #a84c51;
+	--btn-success-hover-bg: #913e42;
+	--btn-success-hover-border: #913e42;
+	--btn-success-active-bg: #692629;
+	--btn-success-active-border: #692629;
+	--btn-success-disabled-bg: #c89ea0;
+	--btn-success-disabled-border: #c89ea0;
+}
+
+header {
+	background: #8B3035;
+}
+.site-content {
+	background-color: #f6f3ff;
+}
+header, header>ul>li>a {
+	color: #c5deea;
+}
+.sidebar nav>ul>li.highlight>a {
+    background: #a84c51 !important;
+}
+.nav-header-logo{
+	background: #692629;
+    color: #FFFFFF;
+}
+.nav-header-logo p {
+	color: rgba(255, 255, 255, 0.95);
+}
+.account-img-profile {
+    background: #d7cdf6;
+}
+.account-menu-container {
+    background: #f4f0ff;
+}
+.account-menu li a:hover {
+    background: #c7bce9;
+}
+.btn-secondary {
+    background: #969091 !important;
+}
+.card-container .copyright {
+    background: none;
+    color: #8b3035;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+

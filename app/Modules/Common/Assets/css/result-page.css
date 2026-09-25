@@ -1,0 +1,258 @@
+/*
+ * ============================================================
+ * FILE GUIDE — result-page.css
+ * Result Page CSS
+ *
+ * Purpose:
+ *     Style generik halaman list: wrapper tabel, badge, skeleton loading.
+ *
+ * Related:
+ *     - Dimuat oleh controller module masing-masing via addStyle().
+ * ============================================================
+ */
+
+.card-table-wrap .dataTables_wrapper > .row:first-child {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.85rem 1rem;
+	margin-bottom: 0.9rem;
+	padding: 0 0.15rem;
+}
+
+.card-table-wrap .dataTables_wrapper > .row:first-child > div {
+	flex: 1 1 220px;
+}
+
+.card-table-wrap .dataTables_length,
+.card-table-wrap .dataTables_filter {
+	margin: 0;
+}
+
+.card-table-wrap .dataTables_length label,
+.card-table-wrap .dataTables_filter label {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 0.6rem;
+	margin: 0;
+	font-size: 0.9rem;
+	font-weight: 600;
+	color: #475569;
+}
+
+.card-table-wrap .dataTables_length select {
+	min-width: 78px;
+	padding-inline: 2rem 0.75rem;
+	border-radius: 0.75rem;
+	border-color: #d7e1eb;
+	background-position: right 0.75rem center;
+}
+
+.card-table-wrap .dataTables_filter {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.card-table-wrap .dataTables_filter input {
+	min-width: min(320px, 100%);
+	margin-left: 0 !important;
+	border-radius: 0.8rem;
+	border: 1px solid #d7e1eb;
+	padding: 0.6rem 0.85rem;
+	font-size: 0.92rem;
+	color: #334155;
+	background: #fff;
+	box-shadow: none;
+}
+
+.card-table-wrap .dataTables_filter input:focus {
+	border-color: #93c5fd;
+	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+	outline: 0;
+}
+
+.card-table-wrap .dataTables_info {
+	padding-top: 0.75rem !important;
+	font-size: 0.88rem;
+	color: #64748b;
+}
+
+.card-table-wrap .dataTables_paginate {
+	padding-top: 0.45rem !important;
+}
+
+.card-table-wrap .dataTables_paginate .paginate_button {
+	border-radius: 0.7rem !important;
+}
+
+.card-table-wrap .dataTables_wrapper {
+	margin-bottom: 0;
+}
+
+.card-table-wrap .dataTables_scroll {
+	border: 1px solid #edf1ee;
+	border-radius: 0.9rem;
+	overflow: hidden;
+	background: #fff;
+}
+
+.card-table-wrap .dataTables_scrollHead {
+	border-bottom: 1px solid #edf1ee;
+}
+
+.card-table-wrap .dataTables_scrollBody {
+	border-bottom: 0 !important;
+}
+
+.card-table-wrap .badge-role {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	border-radius: 999px;
+	background: #eef5ef;
+	color: #365343;
+	border: 1px solid #d9e7dc;
+}
+
+.card-table-wrap .badge-role a {
+	color: #b42318 !important;
+}
+
+.card-table-wrap .btn-action-group {
+	display: inline-flex;
+	gap: 0.5rem;
+	flex-wrap: wrap;
+}
+
+.card-table-wrap .table-inline-note {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.45rem;
+	flex-wrap: wrap;
+	margin-top: 0.45rem;
+	padding: 0.3rem 0.6rem;
+	border-radius: 999px;
+	font-size: 0.76rem;
+	font-weight: 600;
+	line-height: 1.35;
+}
+
+.card-table-wrap .table-inline-note-warning {
+	color: #b42318;
+	background: #fff1f0;
+	border: 1px solid #ffd7d2;
+}
+
+.card-table-wrap .table-inline-note a {
+	color: inherit;
+	text-decoration: underline;
+	text-underline-offset: 0.12rem;
+}
+
+/* Skeleton generik ini dipakai lintas module agar area tabel tetap stabil
+   selama DataTable menyiapkan data awal dari server. */
+.card-table-wrap {
+	position: relative;
+	min-height: 460px;
+}
+
+.result-table-ready {
+	opacity: 0;
+	transition: opacity 0.18s ease;
+}
+
+.result-table-ready--loaded {
+	opacity: 1;
+}
+
+.result-table-skeleton {
+	position: absolute;
+	inset: 0;
+	z-index: 2;
+	display: grid;
+	gap: 0.75rem;
+	padding: 1rem;
+	box-sizing: border-box;
+	align-content: start;
+	background: #fff;
+	border-bottom: 1px solid #e9ecef;
+}
+
+.result-table-skeleton--hidden {
+	display: none;
+}
+
+.result-table-skeleton__row {
+	display: block;
+	height: 2.7rem;
+	border-radius: 0.75rem;
+	background: linear-gradient(90deg, #f1f4f6 25%, #f8fafb 37%, #f1f4f6 63%);
+	background-size: 400% 100%;
+	animation: result-table-skeleton-loading 1.2s ease-in-out infinite;
+}
+
+/* DataTables creates its scroll wrapper after the first paint. Reserve the
+   same visual area before initialization so the page below does not jump. */
+.result-table-region > .dataTables_wrapper {
+	min-height: 460px;
+}
+
+.result-table-region .dataTables_scrollBody {
+	min-height: 350px;
+}
+
+.result-table-region table.dataTable thead th {
+	height: 44px;
+	vertical-align: middle;
+}
+
+.result-table-region table.dataTable tbody td {
+	min-height: 44px;
+	vertical-align: middle;
+}
+
+.page-defer-section {
+	content-visibility: auto;
+	contain-intrinsic-size: 1px 520px;
+}
+
+@keyframes result-table-skeleton-loading {
+	0% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0 50%;
+	}
+}
+
+@media (max-width: 767px) {
+	.card-table-wrap,
+	.result-table-region > .dataTables_wrapper {
+		min-height: 400px;
+	}
+
+	.result-table-region .dataTables_scrollBody {
+		min-height: 280px;
+	}
+
+	.card-table-wrap .dataTables_wrapper > .row:first-child {
+		align-items: stretch;
+	}
+
+	.card-table-wrap .dataTables_length,
+	.card-table-wrap .dataTables_filter {
+		justify-content: flex-start;
+	}
+
+	.card-table-wrap .dataTables_length label,
+	.card-table-wrap .dataTables_filter label {
+		width: 100%;
+	}
+
+	.card-table-wrap .dataTables_filter input {
+		width: 100%;
+		min-width: 0;
+	}
+}
+

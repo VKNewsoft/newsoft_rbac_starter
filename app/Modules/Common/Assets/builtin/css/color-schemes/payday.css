@@ -1,0 +1,78 @@
+:root {
+	--sidebar-group-color: #013062;
+	--sidebar-group-active-bg: #e8f0fb;
+	--sidebar-group-active-color: #013062;
+	--sidebar-group-active-border: rgba(1, 48, 98, 0.18);
+	--sidebar-group-muted: #617a99;
+	--sidebar-item-hover-bg: #dde8f7;
+	--sidebar-item-hover-color: #013062;
+	--sidebar-item-active-bg: #013062;
+	--sidebar-item-active-color: #ffffff;
+	--sidebar-item-active-hover-bg: #184474;
+	--sidebar-item-active-hover-color: #ffffff;
+	--sidebar-tree-open-bg: #e8f0fb;
+	--sidebar-tree-open-color: #013062;
+	--btn-primary-bg: #013062;
+	--btn-primary-border: #013062;
+	--btn-primary-hover-bg: #034c9b;
+	--btn-primary-hover-border: #034c9b;
+	--btn-primary-active-bg: #184474;
+	--btn-primary-active-border: #184474;
+	--btn-primary-disabled-bg: #7d95b2;
+	--btn-primary-disabled-border: #7d95b2;
+	--btn-success-bg: #0769d1;
+	--btn-success-border: #0769d1;
+	--btn-success-hover-bg: #034c9b;
+	--btn-success-hover-border: #034c9b;
+	--btn-success-active-bg: #013062;
+	--btn-success-active-border: #013062;
+	--btn-success-disabled-bg: #7ba7d5;
+	--btn-success-disabled-border: #7ba7d5;
+}
+
+header {
+	background: #013062;
+}
+.site-content {
+	background-color: #f6f3ff;
+}
+header, header>ul>li>a {
+	color: #c5deea;
+}
+.sidebar nav>ul>li.highlight>a {
+    background: linear-gradient(90deg,#6a11cb 0%,#2575fc 100%) !important;
+    color: #ffffff !important;
+    box-shadow: inset 5px 0 rgba(255,255,255,0.08);
+}
+.sidebar nav li>a:hover {
+    background: rgba(37,117,252,0.12);
+    color: #ffffff;
+}
+.nav-header-logo{
+	background: #184474;
+    color: #FFFFFF;
+}
+.nav-header-logo p {
+	color: rgba(255, 255, 255, 0.95);
+}
+.account-img-profile {
+    background: #d7cdf6;
+}
+.account-menu-container {
+    background: #f4f0ff;
+}
+.account-menu li a:hover {
+    background: #c7bce9;
+}
+.btn-secondary {
+    background: #969091 !important;
+}
+.card-container .copyright {
+    background: none;
+    color: #013062;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+

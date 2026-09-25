@@ -1,0 +1,60 @@
+:root {
+	--sidebar-group-color: #475569;
+	--sidebar-group-active-bg: #eef2f7;
+	--sidebar-group-active-color: #475569;
+	--sidebar-group-active-border: rgba(71, 85, 105, 0.16);
+	--sidebar-group-muted: #64748b;
+	--sidebar-item-hover-bg: #f1f5f9;
+	--sidebar-item-hover-color: #475569;
+	--sidebar-item-active-bg: #64748b;
+	--sidebar-item-active-color: #ffffff;
+	--sidebar-item-active-hover-bg: #414659;
+	--sidebar-item-active-hover-color: #ffffff;
+	--sidebar-tree-open-bg: #eef2f7;
+	--sidebar-tree-open-color: #475569;
+	--btn-primary-bg: #64748b;
+	--btn-primary-border: #64748b;
+	--btn-primary-hover-bg: #475569;
+	--btn-primary-hover-border: #475569;
+	--btn-primary-active-bg: #334155;
+	--btn-primary-active-border: #334155;
+	--btn-primary-disabled-bg: #b3bcc8;
+	--btn-primary-disabled-border: #b3bcc8;
+	--btn-success-bg: #475569;
+	--btn-success-border: #475569;
+	--btn-success-hover-bg: #334155;
+	--btn-success-hover-border: #334155;
+	--btn-success-active-bg: #1f2937;
+	--btn-success-active-border: #1f2937;
+	--btn-success-disabled-bg: #98a5b5;
+	--btn-success-disabled-border: #98a5b5;
+}
+
+header {
+	background: #63697b;
+}
+.site-content {
+	background-color: #f4f4f4;
+}
+header, header>ul>li>a {
+	color: #c5deea;
+}
+.sidebar nav>ul>li.highlight>a {
+    background: #6e758c !important;
+}
+.nav-header-logo{
+	background: #414659;
+    color: #FFFFFF;
+}
+.nav-header-logo p {
+	color: rgba(255, 255, 255, 0.95);
+}
+.account-img-profile {
+    background: #c9cfd2;
+}
+.account-menu-container {
+    background: #e7e9eb;
+}
+.account-menu li a:hover {
+    background: #b8c1c4;
+}
