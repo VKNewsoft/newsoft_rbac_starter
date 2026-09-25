@@ -118,18 +118,40 @@ The `Common` module contains the shared base controller, base model, global desi
 - Apache with `mod_rewrite` (or any web server able to run CodeIgniter 4)
 - [XAMPP](https://www.apachefriends.org/) is the easiest option on Windows — start **Apache** and **MySQL**
 
-### Option 1 — Web installer (recommended)
+### Step 1 — Get the project
 
-1. Clone/download this project into your web root (e.g. `C:\xampp\htdocs\`).
-2. Open the application URL in a browser (e.g. `http://localhost/newsoft_rbac_starter`).
-3. If the database is not initialized, the `InstallerCheck` filter redirects to `/installer`.
-4. Fill in the database host, port, username, password, and database name (typical XAMPP defaults: `localhost`, `3306`, `root`, empty password, `newsoft_app`).
-5. Click **Install**. The installer imports `app/Database/newsoft_base.sql`, creates **34 tables**, and loads 82,000+ regional rows plus the seed data.
-6. Confirm the success page and log in.
+```bash
+git clone https://github.com/VKNewsoft/newsoft_rbac_starter.git
+```
 
-The web installer validates input, writes `app/Config/Database.php`, and reports clearer errors than a raw import. Do not assume the redirect means every table imported — verify the schema when investigating a partial installation.
+Or download and extract the ZIP into your web root (e.g. `C:\xampp\htdocs\newsoft_rbac_starter`). Make sure the `writable/` directory is writable by the web server (cache, logs, sessions).
 
-### Option 2 — CLI installer
+### Step 2 — Run the installer
+
+The database is created automatically by the installer — you do not need to create it by hand.
+
+#### Option A — Web installer (recommended) ⭐
+
+1. Start **Apache** and **MySQL** (XAMPP Control Panel).
+2. Open the application URL in a browser, e.g. `http://localhost/newsoft_rbac_starter/`.
+3. If the database is not initialized, the `InstallerCheck` filter automatically redirects you to the `/installer` page.
+4. Fill in the database configuration form:
+
+   | Field | Typical XAMPP value |
+   |---|---|
+   | Database Host | `localhost` |
+   | Database Port | `3306` |
+   | Database Username | `root` |
+   | Database Password | *(leave empty)* |
+   | Database Name | `newsoft_app` |
+
+5. Click **Install Database**. The installer imports `app/Database/newsoft_base.sql` — **34 tables**, 82,000+ regional rows, and all seed data — then writes `app/Config/Database.php` automatically.
+6. Wait for the success page. The import takes about 1–2 minutes; do not close the browser tab while it runs.
+7. After success you are redirected to the login page.
+
+**Advantages:** user-friendly UI, automatic input validation, database config saved automatically, clear error messages, no terminal needed.
+
+#### Option B — CLI installer
 
 From the repository root:
 
@@ -142,22 +164,47 @@ php verify_import.php
 php check_tables.php
 ```
 
-The import takes 1–2 minutes because of the large regional dataset. The CLI installer uses a **fresh-install workflow that drops and recreates the target database** — never run it against a database containing data that must be preserved.
+The import shows realtime progress and takes 1–2 minutes because of the large regional dataset. After a manual import, configure `app/Config/Database.php` with your actual server settings.
 
-### First login
+> ⚠️ **Warning:** both installers are fresh-install workflows that can **drop and recreate the target database**. Never run them against a production database or any database containing data that must be preserved. Create a backup first, e.g. `mysqldump -u root newsoft_app > backup.sql`.
+
+### Step 3 — Verify the installation
+
+```bash
+cd manual_installer
+php verify_import.php
+```
+
+Expected results:
+
+- `Expected: 34 tables` / `Found: 34 tables` ✅
+- Row counts shown for the important tables (`core_user`, `core_menu`, `core_role`, `core_wilayah_kelurahan`, `core_bank`, ...)
+- `php check_tables.php` shows the per-table checklist (✅ ada / ❌ hilang)
+- The `core_user` table exists — `InstallerCheck` uses it to detect an initialized application
+- `writable/logs/` contains no new errors
+
+### Step 4 — First login
 
 | Username | Password |
 |---|---|
 | `admin` | `123456` |
 
+The seeded installation includes 1 default company, the Administrator role, default menu/role configuration, 141 Indonesian banks, and 82,503 kelurahan rows (complete Indonesian administrative regions).
+
 > ⚠️ The bootstrap credentials are for initial setup only. **Change the admin password immediately** before exposing the application beyond your local machine.
 
-### Post-install verification
+### Troubleshooting (quick)
 
-- The schema should contain **34 tables** (`php manual_installer/verify_import.php`).
-- `core_user` exists (used by `InstallerCheck` to detect initialization).
-- Log in with the bootstrap account, then change its password.
-- Check `writable/logs/` for errors.
+| Problem | Solution |
+|---|---|
+| `Connection refused` / can't connect to MySQL | Start the MySQL service, then verify host and port. |
+| `Access denied for user` | Check username/password; the account must be able to create databases and tables. |
+| `Unknown database` | Normal on first setup — run the web installer or `php manual_installer/import_sql.php`. |
+| `Table 'core_module' doesn't exist` | Import incomplete — rerun the import, then `php check_tables.php`. |
+| Installer page does not appear | Check `app/Config/Database.php`, open `/installer` manually, inspect `writable/logs/`. |
+| Import seems to hang | Normal for 82,000+ rows (1–2 minutes); do not close the browser/terminal. |
+
+📖 More detail: [INSTALLATION.md](INSTALLATION.md) (panduan step-by-step) and [DATABASE_INSTALLATION_GUIDE.md](DATABASE_INSTALLATION_GUIDE.md) (technical troubleshooting & FAQ).
 
 ---
 

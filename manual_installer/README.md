@@ -14,7 +14,7 @@ DATABASE INSTALLER - MANUAL MODE
 Pilih opsi instalasi:
 [1] Install Database (Import newsoft_base.sql)
 [2] Verify Import (Cek hasil instalasi)
-[3] Check Tables (Detail checklist 35 tabel)
+[3] Check Tables (Detail checklist 34 tabel)
 [4] Exit
 ```
 
@@ -30,7 +30,7 @@ php import_sql.php
 Import seluruh database dari `app/Database/newsoft_base.sql`:
 - Drop database `newsoft_app` jika sudah ada
 - Create database baru
-- Import 35 tabel + 82,000+ data
+- Import 34 tabel + 82,000+ data
 - Progress ditampilkan setiap 100 queries
 
 #### 2. Verify Installation
@@ -51,7 +51,7 @@ php check_tables.php
 ```
 
 Checklist detail semua tabel:
-- List 35 tabel dari SQL file
+- List 34 tabel dari SQL file
 - Status masing-masing tabel (✅ ada / ❌ hilang)
 - Deteksi tabel yang tidak terimport
 

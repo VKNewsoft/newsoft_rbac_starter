@@ -22,7 +22,7 @@ Cara termudah untuk install database adalah melalui web installer yang sudah ter
    - Database Password (kosongkan jika tidak ada)
    - Nama Database (default: `newsoft_app`)
 5. Klik tombol **"Install Database"**
-6. Tunggu proses instalasi selesai (import 35 tabel + data)
+6. Tunggu proses instalasi selesai (import 34 tabel + data)
 7. Setelah sukses, Anda akan diarahkan ke halaman login
 
 ### **Keuntungan Web Installer:**
