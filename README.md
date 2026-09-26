@@ -278,7 +278,7 @@ Alur setup yang umum: buat role → berikan permission → buat user dan tugaska
 - Periksa `writable/logs/` dan console browser setelah mengubah UI; uji perilaku responsif hingga lebar mobile.
 - Panduan tambahan di repositori ini: [`HMVC_MODULE_GUIDE.md`](HMVC_MODULE_GUIDE.md), [`INSTALLATION.md`](INSTALLATION.md), [`DATABASE_INSTALLATION_GUIDE.md`](DATABASE_INSTALLATION_GUIDE.md).
 
-Kontribusi: fork repositori, buat branch fitur, jaga perubahan tetap kecil dan terverifikasi, lalu buka pull request yang menjelaskan motivasi dan pengujian yang dilakukan.
+Kontribusi: fork repositori, buat branch fitur, jaga perubahan tetap kecil dan terverifikasi, lalu buka pull request yang menjelaskan motivasi dan pengujian yang dilakukan. Karena `main` dilindungi, semua perubahan masuk lewat pull request — lihat [`CONTRIBUTING.md`](CONTRIBUTING.md) untuk alur kerja harian yang lengkap.
 
 ---
 
