@@ -1,0 +1,20 @@
+# Normalisasi line-ending lintas sistem operasi
+* text=auto eol=lf
+
+# Skrip Windows harus tetap CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# File biner - jangan pernah dinormalisasi atau di-diff
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.otf binary
+*.pdf binary
+*.zip binary
