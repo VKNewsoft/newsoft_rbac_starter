@@ -278,7 +278,7 @@ A typical setup flow: create a role → grant it permissions → create users an
 - Check `writable/logs/` and the browser console after UI changes; test responsive behavior down to mobile widths.
 - Additional guides in this repository: [`HMVC_MODULE_GUIDE.md`](HMVC_MODULE_GUIDE.md), [`INSTALLATION.md`](INSTALLATION.md), [`DATABASE_INSTALLATION_GUIDE.md`](DATABASE_INSTALLATION_GUIDE.md).
 
-Contributions: fork the repository, create a feature branch, keep changes small and verifiable, and open a pull request describing the motivation and testing done.
+Contributions: fork the repository, create a feature branch, keep changes small and verifiable, and open a pull request describing the motivation and testing done. Because `main` is protected, all changes go through pull requests — see [`CONTRIBUTING.md`](CONTRIBUTING.md) for the full daily workflow.
 
 ---
 
